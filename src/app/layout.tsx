@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { NotificationsProvider } from "@/components/notifications-provider";
 import { Sidebar } from "@/components/sidebar";
 import { Header } from "@/components/header";
 
@@ -29,20 +30,23 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* ThemeProvider manages light/dark mode across the entire app */}
         <ThemeProvider>
-          {/* Main layout: sidebar on the left, content on the right */}
-          <div className="flex h-screen overflow-hidden">
-            {/* Navigation sidebar */}
-            <Sidebar />
-            {/* Main content area */}
-            <div className="flex flex-1 flex-col overflow-hidden">
-              {/* Top header bar with search, notifications, and theme toggle */}
-              <Header />
-              {/* Page content — scrollable area where each page renders */}
-              <main className="flex-1 overflow-y-auto bg-dashboard-bg p-4 md:p-6 lg:p-8">
-                {children}
-              </main>
+          {/* NotificationsProvider manages notification stream and unread badge */}
+          <NotificationsProvider>
+            {/* Main layout: sidebar on the left, content on the right */}
+            <div className="flex h-screen overflow-hidden">
+              {/* Navigation sidebar */}
+              <Sidebar />
+              {/* Main content area */}
+              <div className="flex flex-1 flex-col overflow-hidden">
+                {/* Top header bar with search, notifications, and theme toggle */}
+                <Header />
+                {/* Page content — scrollable area where each page renders */}
+                <main className="flex-1 overflow-y-auto bg-dashboard-bg p-4 md:p-6 lg:p-8">
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
+          </NotificationsProvider>
         </ThemeProvider>
       </body>
     </html>
