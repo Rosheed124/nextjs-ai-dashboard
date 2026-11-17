@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    // Use modern ECMAScript standards for the output
+    "target": "ES2017",
+    // Use the Bundler module system (best for Next.js)
+    "module": "esnext",
+    // Let Next.js handle module resolution for us
+    "moduleResolution": "bundler",
+    // Allow importing JSON files directly
+    "resolveJsonModule": true,
+    // Allow importing from CommonJS modules using default imports
+    "esModuleInterop": true,
+    // Turn on all strict type-checking options (catches more bugs)
+    "strict": true,
+    // Don't output compiled files (Next.js handles this)
+    "noEmit": true,
+    // Preserve JSX so Next.js can transform it
+    "jsx": "preserve",
+    // Enable incremental compilation for faster builds
+    "incremental": true,
+    // Use Next.js's built-in JSX runtime (no need to import React)
+    "jsxImportSource": "react",
+    // Allow JavaScript files too, not just TypeScript
+    "allowJs": true,
+    // Skip type-checking for node_modules (saves time)
+    "skipLibCheck": true,
+    // Make sure file name casing is consistent
+    "forceConsistentCasingInFileNames": true,
+    // Keep decorators working (some libraries need this)
+    "experimentalDecorators": true,
+    // Set up shortcut paths: "@/" points to the "src/" folder
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    // Tell TypeScript about Next.js-specific plugins and paths
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // Include the necessary type definition files
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  // Which files TypeScript should check
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  // Which files to skip
+  "exclude": ["node_modules"]
+}

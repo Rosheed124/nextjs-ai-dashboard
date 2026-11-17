@@ -1,0 +1,54 @@
+/* Import Tailwind's utility layers — these power all our utility classes */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define CSS custom properties (variables) for our dashboard theme */
+/* These change depending on whether dark mode is active or not */
+@layer base {
+  /* Light mode colors (default) */
+  :root {
+    --dashboard-bg: #f8fafc;
+    --dashboard-card: #ffffff;
+    --dashboard-border: #e2e8f0;
+    --dashboard-text: #0f172a;
+    --dashboard-muted: #64748b;
+    --dashboard-accent: #3b82f6;
+    --dashboard-success: #22c55e;
+    --dashboard-warning: #f59e0b;
+    --dashboard-danger: #ef4444;
+  }
+
+  /* Dark mode colors — activated when the 'dark' class is on <html> */
+  .dark {
+    --dashboard-bg: #0f172a;
+    --dashboard-card: #1e293b;
+    --dashboard-border: #334155;
+    --dashboard-text: #f1f5f9;
+    --dashboard-muted: #94a3b8;
+    --dashboard-accent: #60a5fa;
+    --dashboard-success: #4ade80;
+    --dashboard-warning: #fbbf24;
+    --dashboard-danger: #f87171;
+  }
+
+  /* Apply the background color to the whole page body */
+  body {
+    background-color: var(--dashboard-bg);
+    color: var(--dashboard-text);
+  }
+}
+
+/* Custom utility class for the shimmer loading animation */
+@layer utilities {
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--dashboard-card) 25%,
+      var(--dashboard-border) 50%,
+      var(--dashboard-card) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}
