@@ -56,7 +56,7 @@ A production-grade, real-time analytics dashboard built with **Next.js 15**, **R
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/nextjs-ai-dashboard.git
+git clone https://github.com/Rosheed124/nextjs-ai-dashboard.git
 cd nextjs-ai-dashboard
 
 # Install dependencies
@@ -151,4 +151,4 @@ MIT License — feel free to use this as a template for your own projects.
 
 ---
 
-Built with 💙 by a developer who believes in shipping production-quality code.
+Built with 💙 by **Fagbenro Rosheed Iyiola** — Frontend Engineer | Automation Engineer | Law Student
