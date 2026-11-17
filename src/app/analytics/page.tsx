@@ -1,14 +1,36 @@
 "use client";
 
-// Interactive Analytics Page with time-range filtering, comparison cards, and interactive metrics
-import { useState } from "react";
-import { RevenueChart } from "@/components/revenue-chart";
-import { BarChart2, TrendingUp, DollarSign, Target, Calendar, ArrowUpRight, ArrowDownRight, Filter } from "lucide-react";
+// Interactive Analytics Page with time-range filtering, comparison cards, and interactive charts
+import { useState, useEffect } from "react";
+import { RevenueChartClient } from "@/components/revenue-chart-client";
+import { fetchRevenueData } from "@/lib/data";
+import { RevenueDataPoint } from "@/lib/types";
+import { ChartSkeleton } from "@/components/skeletons/chart-skeleton";
+import { BarChart2, TrendingUp, DollarSign, Target, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function AnalyticsPage() {
   // Timeframe filter state
   const [timeframe, setTimeframe] = useState<"7d" | "30d" | "90d" | "12m">("12m");
+  const [chartData, setChartData] = useState<RevenueDataPoint[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch chart data client-side in this interactive component
+  useEffect(() => {
+    let isMounted = true;
+    async function loadData() {
+      setLoading(true);
+      const data = await fetchRevenueData();
+      if (isMounted) {
+        setChartData(data);
+        setLoading(false);
+      }
+    }
+    loadData();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Multiplier simulation for interactive timeframe switching
   const multipliers: Record<string, { arr: string; ltv: string; churn: string; margin: string }> = {
@@ -114,7 +136,19 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Main Revenue Chart */}
-      <RevenueChart />
+      <div className="rounded-xl border border-dashboard-border bg-dashboard-card p-6 shadow-sm">
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-dashboard-text">
+            Revenue & Profit
+          </h2>
+          <p className="text-sm text-dashboard-muted">Monthly overview for 2026</p>
+        </div>
+        {loading ? (
+          <div className="h-[350px] rounded-lg shimmer" />
+        ) : (
+          <RevenueChartClient data={chartData} />
+        )}
+      </div>
     </div>
   );
 }
