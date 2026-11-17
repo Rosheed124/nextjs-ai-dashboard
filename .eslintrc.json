@@ -1,0 +1,4 @@
+// ESLint configuration for Next.js and TypeScript
+{
+  "extends": ["next/core-web-vitals"]
+}
